@@ -100,7 +100,8 @@ router.patch('/seen/:userId', auth, async (req, res) => {
   }
 });
 
-/
+
+// Get a user's public profile
 router.get('/user/:id', auth, async (req, res) => {
   try {
     const user = await User.findById(req.params.id).select('-password');
