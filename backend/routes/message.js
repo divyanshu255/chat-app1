@@ -84,6 +84,23 @@ router.get('/summary/:userId', auth, async (req, res) => {
   }
 });
 
+router.patch('/seen/:userId', auth, async (req, res) => {
+  const currentUserId = req.user.userId;
+  const senderId = req.params.userId;
+
+  try {
+    const updated = await Message.updateMany(
+      { sender: senderId, receiver: currentUserId, seen: false },
+      { $set: { seen: true } }
+    );
+
+    res.json({ message: 'Messages marked as seen', modifiedCount: updated.modifiedCount });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
 
 
 module.exports = router; 
