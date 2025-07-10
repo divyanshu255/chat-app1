@@ -53,4 +53,37 @@ router.get('/:userId', auth, async (req, res) => {
   }
 });
 
+
+
+router.get('/summary/:userId', auth, async (req, res) => {
+  const userId = req.user.userId;
+  const otherUserId = req.params.userId;
+
+  try {
+    const lastMessage = await Message.findOne({
+      $or: [
+        { sender: userId, receiver: otherUserId },
+        { sender: otherUserId, receiver: userId },
+      ],
+    })
+      .sort({ timestamp: -1 })
+      .lean();
+
+    const unseenCount = await Message.countDocuments({
+      sender: otherUserId,
+      receiver: userId,
+      seen: false,
+    });
+
+    res.json({
+      lastMessage: lastMessage || null,
+      unseenCount,
+    });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+
 module.exports = router; 
