@@ -3,8 +3,8 @@ const express = require('express');
 const http = require('http');
 const mongoose = require('mongoose');
 const { Server } = require('socket.io');
-const authRoutes = require('./routes/auth');
-const messageRoutes = require('./routes/message');
+const authRoutes = require('./routes/auth.js');
+const messageRoutes = require('./routes/message.js');
 
 const app = express();
 const server = http.createServer(app);

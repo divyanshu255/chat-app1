@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const User = require('../models/User.js');
 
 const router = express.Router();
 
@@ -58,7 +58,12 @@ router.post('/login', async (req, res) => {
   }
 });
 // ... existing code ...
+<<<<<<< HEAD
 
+=======
+// const User = require('../models/User');
+// const jwt = require('jsonwebtoken');
+>>>>>>> 2fb4438495bdb0a6051a59c9950525d0cc0fd50b
 
 // Middleware to protect routes
 function auth(req, res, next) {
