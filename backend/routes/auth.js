@@ -58,8 +58,7 @@ router.post('/login', async (req, res) => {
   }
 });
 // ... existing code ...
-const User = require('../models/User');
-const jwt = require('jsonwebtoken');
+
 
 // Middleware to protect routes
 function auth(req, res, next) {
